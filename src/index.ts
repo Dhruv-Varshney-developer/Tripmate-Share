@@ -23,9 +23,17 @@ import {
   parseArguments,
 } from "./config/index.ts";
 import { initializeDatabase } from "./database/index.ts";
+import { getStorageClient } from "@storacha/elizaos-plugin";
+import { retrieveTripData } from "./database/retrieveTripData.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+declare module "@elizaos/core" {
+  export enum ServiceType {
+    STORACHA = "storacha",
+  }
+}
 
 export const wait = (minTime: number = 1000, maxTime: number = 3000) => {
   const waitTime =
@@ -86,8 +94,25 @@ async function startAgent(character: Character, directClient: DirectClient) {
 
     const cache = initializeDbCache(character, db);
     const runtime = createAgent(character, db, cache, token);
+    const storageClient = getStorageClient(runtime as any)
 
     await runtime.initialize();
+
+    runtime.registerAction({
+      name: 'retrieveTripData',
+      description: 'Retrieves trip data using CID and summarises it in a clear, illustrative, and factual way.',
+      similes: ['trip data', 'summarise', 'retrieve', 'get', 'fetch'],
+      validate: async () => true,
+      handler: async (_, message, state, options, callback) => {
+        elizaLogger.info("Retrieving Action Called");
+        await retrieveTripData(message, state, callback, storageClient)
+        elizaLogger.success("Trip summary retrieved and presented.");
+      },
+      examples: [
+        [{ user: "{{user1}}", content: { text: "Get my past trip data..." } },
+         { user: "{{agent}}", content: { text: "Here’s the summary of your trip data: { Budget... }" } }],
+      ],
+    });
 
     runtime.clients = await initializeClients(character, runtime);
 
