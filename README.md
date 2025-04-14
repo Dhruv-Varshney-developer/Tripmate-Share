@@ -131,3 +131,12 @@ You can customize the agent's personality and behavior by:
 1. Editing `src/character.ts` directly
 2. Creating a custom character JSON file in the `characters/` directory
 3. Running with the `--characters` flag to load your custom configuration
+
+## Learn more about the project on these links:
+- [TripMate Planner](https://github.com/Dhruv-Varshney-developer/Tripmate-Planner) - Agent 1
+- [TripMate Finder](https://github.com/Dhruv-Varshney-developer/Tripmate-Finder)- Agent 2
+- [TripMate Share](https://github.com/Dhruv-Varshney-developer/Tripmate-Share)- Agent 3
+- [Technical Whitepaper](https://motley-popcorn-c4a.notion.site/Technical-docs-1d52ab2404df8018afdfe86f4e8fdd29)
+- [Tripmate Overview](https://docs.google.com/document/d/1YahKkW0qBaG_6H9lp3DIPhmn56ApjW2dxbJNvrDZqOg/edit?usp=sharing)
+- [Demo video](https://www.youtube.com/watch?v=cyKxdZ3uryQ)
+- [Presentation Link](https://www.canva.com/design/DAGkjcxFXBQ/az25u5Wo1RgXVDd7d78UYQ/edit?utm_content=DAGkjcxFXBQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) 
